@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FORMATION EVALUATION</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<div id="accessPage" class="access-page">
+  <div class="access-shell">
+    <div class="access-card">
+      <div class="access-top">
+        <div class="access-branding no-logo">
+          <div class="access-title-wrap">
+            <h1 class="access-title">FORMATION<br>EVALUATION</h1>
+            <p class="access-subtitle">Evaluations en ligne · Espace etudiant</p>
+          </div>
+        </div>
+        <div class="access-badge">Matricule</div>
+      </div>
+
+      <div class="access-divider"></div>
+
+      <div class="access-body">
+        <label for="accessMatricule" class="access-label">Votre matricule</label>
+        <input id="accessMatricule" class="access-input" type="text" placeholder="Ex : 25IDE12345" onkeydown="if(event.key === 'Enter'){enterWithMatricule();}" />
+        <p class="access-help">Saisissez exactement votre matricule,<br>principal ou secondaire.</p>
+        <button onclick="enterWithMatricule()" class="access-button">Accéder a mes evaluations</button>
+      </div>
+    </div>
+
+    <p class="access-footer">/evaluations - base locale synchronisee</p>
+  </div>
+</div>
+
+<script>
+function enterWithMatricule() {
+  const input = document.getElementById("accessMatricule");
+  const matricule = input.value.trim();
+
+  if (!matricule) {
+    alert("Veuillez entrer votre numéro matricule.");
+    input.focus();
+    return;
+  }
+
+  window.activeStudentMatricule = matricule;
+  localStorage.setItem("REVISION_LICENCE_1_ACTIVE_MATRICULE", matricule);
+
+  document.getElementById("accessPage").style.display = "none";
+  document.getElementById("siteHeader").style.display = "block";
+  document.getElementById("mainContent").style.display = "block";
+
+  if (typeof showHome === 'function') {
+    showHome();
+  }
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  const input = document.getElementById("accessMatricule");
+  if (input) input.focus();
+});
+</script>
+
+<header id="siteHeader" class="student-site-header" style="display:none;">
+  <div class="container student-topbar">
+    <div class="student-topbar-title">
+      <h1>Évaluations – Espace Étudiant</h1>
+    </div>
+    <div class="student-topbar-actions">
+      <div id="studentHeaderName" class="student-topbar-name">LE MECHANT MECHANT |</div>
+      <button class="student-logout-btn" onclick="logoutStudent()">Déconnexion</button>
+    </div>
+  </div>
+</header>
+
+<main class="container" id="mainContent" style="display:none;">
+  <section id="homeView" class="student-home"></section>
+
+  <section id="quizView" class="hidden"></section>
+  <section id="resultView" class="hidden"></section>
+
+  <section id="adminView" class="panel hidden">
+    <div class="topbar">
+      <div>
+        <h2>Espace ADMIN</h2>
+        <p class="muted">Ajoute, modifie ou supprime les sujets. Les changements sont sauvegardés automatiquement.</p>
+      </div>
+      <div class="actions">
+        <button class="btn-green" onclick="openSubjectEditor()">+ Ajouter un sujet</button>
+        <button class="btn-orange" onclick="resetDefaultSubjects()">Réinitialiser les sujets par défaut</button>
+        <button class="btn-light" onclick="showHome()">Retour étudiant</button>
+      </div>
+    </div>
+
+    <div class="tabs">
+      <button onclick="renderAdminSubjects()">Sujets</button>
+      <button onclick="renderAdminResults()">Résultats</button>
+    </div>
+    <div id="adminContent"></div>
+  </section>
+</main>
+
+<div id="modal" class="modal hidden"></div>
+
+<script src="script.js"></script>
+</body>
+</html>

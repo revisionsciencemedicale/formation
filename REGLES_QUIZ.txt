@@ -1,0 +1,6 @@
+Règles appliquées à tous les sujets :
+- Temps par sujet : 30 minutes
+- Bonne réponse : +1 point
+- Mauvaise réponse : -1 point
+- Pas de réponse : 0 point
+- Ces paramètres seront utilisés pour tous les nouveaux sujets ajoutés.
