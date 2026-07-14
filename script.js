@@ -685,6 +685,90 @@
     let savedQuestionAnswers = {};
     const QUESTION_DURATION_SECONDS = 30;
 
+    // Composition de chaque évaluation : 15 questions au total.
+    // Les 40 questions restent disponibles dans la banque et un nouveau
+    // tirage est effectué à chaque tentative.
+    const QUIZ_COMPOSITION = {
+      trueFalse: 5,
+      singleAnswer: 5,
+      multipleAnswers: 5
+    };
+
+    function shuffleQuestions(items) {
+      const shuffled = items.slice();
+      for (let i = shuffled.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+      }
+      return shuffled;
+    }
+
+    function getExpectedAnswers(question) {
+      if (Array.isArray(question.answers)) return question.answers;
+      if (Array.isArray(question.correct)) return question.correct;
+      return [question.answer || question.correct].filter(Boolean);
+    }
+
+    function getQuestionCategory(question) {
+      const options = Array.isArray(question.options) ? question.options : [];
+      const isTrueFalse = options.length === 2 && options.includes("Vrai") && options.includes("Faux");
+      if (isTrueFalse) return "trueFalse";
+      return getExpectedAnswers(question).length > 1 ? "multipleAnswers" : "singleAnswer";
+    }
+
+    function getQuizQuestionCount() {
+      return QUIZ_COMPOSITION.trueFalse + QUIZ_COMPOSITION.singleAnswer + QUIZ_COMPOSITION.multipleAnswers;
+    }
+
+    function selectQuizQuestions(questionBank) {
+      const categories = {
+        trueFalse: [],
+        singleAnswer: [],
+        multipleAnswers: []
+      };
+
+      questionBank.forEach(question => {
+        categories[getQuestionCategory(question)].push(question);
+      });
+
+      const selected = [];
+      Object.entries(QUIZ_COMPOSITION).forEach(([category, quantity]) => {
+        if (categories[category].length < quantity) {
+          throw new Error(`Nombre insuffisant de questions dans la catégorie ${category}.`);
+        }
+        selected.push(...shuffleQuestions(categories[category]).slice(0, quantity));
+      });
+
+      return shuffleQuestions(selected);
+    }
+
+    function getQuestionOrderSignature(questions) {
+      return questions.map(question => question.text || "").join("||");
+    }
+
+    function shuffleForNewLearningSession(subjectId, questions) {
+      const storageKey = `FORMATION_EVALUATION_last_question_order_${subjectId}`;
+      const previousSignature = localStorage.getItem(storageKey);
+      let shuffled = shuffleQuestions(questions);
+
+      // Évite de présenter exactement le même ordre lors de deux sessions
+      // consécutives, même si le tirage aléatoire produit par hasard le même résultat.
+      if (shuffled.length > 1 && getQuestionOrderSignature(shuffled) === previousSignature) {
+        shuffled = [...shuffled.slice(1), shuffled[0]];
+      }
+
+      localStorage.setItem(storageKey, getQuestionOrderSignature(shuffled));
+      return shuffled;
+    }
+
+    function prepareSubjectForQuiz(subject) {
+      const selectedQuestions = selectQuizQuestions(subject.questions);
+      return {
+        ...cloneData(subject),
+        questions: shuffleForNewLearningSession(subject.id, selectedQuestions)
+      };
+    }
+
     /********************************************************************
      * SUIVI DE SORTIE DE PAGE / ONGLET
      * L'étudiant n'est pas bloqué et ne reçoit pas d'avertissement.
@@ -985,6 +1069,7 @@
           </div>
           <p class="student-evaluation-meta"><strong>Matière :</strong> ${escapeHTML(availableSubject.matter)}</p>
           <p class="student-evaluation-meta"><strong>Durée :</strong> ${availableSubject.duration} min</p>
+          <p class="student-evaluation-meta"><strong>Questions :</strong> ${getQuizQuestionCount()} au total (5 Vrai/Faux, 5 à réponse unique et 5 à réponses multiples)</p>
           <p class="student-evaluation-meta"><strong>Fermeture :</strong> ${formatDateTime(availableSubject.closeDate, availableSubject.closeTime)}</p>
           <button class="student-start-btn" onclick="startQuickEvaluation('${availableSubject.id}')">Commencé</button>
         </div>
@@ -1056,7 +1141,7 @@
       const subject = subjects.find(s => s.id === subjectId);
       if (!subject) return alert("Sujet introuvable.");
 
-      currentSubject = subject;
+      currentSubject = prepareSubjectForQuiz(subject);
       currentStudent = {
         ...student,
         photo: photoData || ""
@@ -1342,7 +1427,7 @@
       if (status.key !== "available") return alert(status.message);
 
       const profile = getStudentProfile();
-      currentSubject = subject;
+      currentSubject = prepareSubjectForQuiz(subject);
       currentStudent = {
         nom: profile.nom,
         prenom: profile.prenom,
@@ -1717,7 +1802,7 @@
                   <td><span class="badge ${s.programmed ? 'available' : 'locked'}">${s.programmed ? 'Programmé' : 'Non programmé'}</span></td>
                   <td>Du ${formatDateTime(s.openDate, s.openTime)}<br>au ${formatDateTime(s.closeDate, s.closeTime)}</td>
                   <td>${s.duration} min</td>
-                  <td>${s.questions.length}</td>
+                  <td>${getQuizQuestionCount()} tirées sur ${s.questions.length}</td>
                   <td class="actions">
                     <button class="${s.programmed ? 'btn-dark' : 'btn-green'}" onclick="toggleProgrammed('${s.id}')">${s.programmed ? 'Retirer' : 'Programmer'}</button>
                     <button class="btn-orange" onclick="openSubjectEditor('${s.id}')">Modifier</button>
