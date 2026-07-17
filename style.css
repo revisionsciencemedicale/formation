@@ -1394,6 +1394,43 @@ button,
   background: rgba(255,255,255,0.08);
 }
 
+.student-settings-btn {
+  border: 1px solid rgba(255,255,255,.55);
+  border-radius: 10px;
+  padding: 9px 14px;
+  background: rgba(255,255,255,.15);
+  color: #fff;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.student-settings-btn:hover { background: rgba(255,255,255,.25); }
+
+.settings-modal-content { max-width: 520px; }
+.settings-field { display: grid; gap: 8px; margin: 18px 0; }
+.settings-field input,
+.settings-field select {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 10px;
+  background: #fff;
+  font: inherit;
+}
+.settings-actions { justify-content: flex-end; margin-top: 24px; }
+.all-questions-note { margin-bottom: 18px; }
+.all-question-block {
+  padding: 18px 0;
+  border-bottom: 1px solid #e2e8f0;
+}
+.all-question-number {
+  margin-bottom: 8px;
+  color: #166534;
+  font-size: .9rem;
+  font-weight: 800;
+}
+
 .student-home {
   padding: 28px 0 36px;
 }

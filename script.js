@@ -669,6 +669,91 @@
       ]
     };
 
+    // Complément de la banque : 100 questions équilibrées au total
+    // (34 Vrai/Faux, 33 réponses uniques et 33 réponses multiples).
+    const EXTRA_TRUE_FALSE = [
+      ["Le consentement libre et éclairé du patient doit être recherché avant un soin, sauf urgence prévue par la loi.", "Vrai"],
+      ["Le secret professionnel ne concerne que les informations écrites dans le dossier médical.", "Faux"],
+      ["L’infirmier doit assurer la continuité des soins lorsqu’il quitte son poste.", "Vrai"],
+      ["Une erreur de soin peut être dissimulée si elle n’a pas entraîné de dommage visible.", "Faux"],
+      ["Le respect de la dignité s’applique à toute personne, quelle que soit sa situation sociale.", "Vrai"],
+      ["L’infirmier peut publier la photographie identifiable d’un patient sans son autorisation.", "Faux"],
+      ["La traçabilité des soins contribue à la sécurité du patient.", "Vrai"],
+      ["L’urgence autorise l’infirmier à agir dans les limites de ses compétences.", "Vrai"],
+      ["Un étudiant peut réaliser seul tout acte infirmier sans supervision.", "Faux"],
+      ["L’infirmier doit actualiser régulièrement ses connaissances professionnelles.", "Vrai"],
+      ["Le refus de soins exprimé par un patient capable doit être ignoré.", "Faux"],
+      ["La discrétion professionnelle concerne aussi les conversations dans les lieux publics.", "Vrai"],
+      ["Une prescription illisible doit être exécutée sans demander de clarification.", "Faux"],
+      ["L’infirmier doit respecter les croyances du patient lorsqu’elles ne compromettent pas la sécurité des soins.", "Vrai"],
+      ["Le dossier de soins peut être laissé à la portée de toute personne du service.", "Faux"],
+      ["La relation soignant-soigné doit rester professionnelle.", "Vrai"],
+      ["L’infirmier peut recevoir un avantage pour orienter un patient vers un établissement particulier.", "Faux"],
+      ["Le signalement d’un événement indésirable participe à l’amélioration de la qualité des soins.", "Vrai"],
+      ["La confidentialité doit être respectée pendant les transmissions entre professionnels.", "Vrai"],
+      ["L’infirmier est autorisé à exercer sous l’effet de l’alcool s’il se sent capable.", "Faux"],
+      ["La responsabilité professionnelle peut être engagée en cas de négligence.", "Vrai"],
+      ["Le patient n’a jamais le droit d’accéder aux informations qui le concernent.", "Faux"],
+      ["L’infirmier doit protéger les données de santé enregistrées sur un outil numérique.", "Vrai"],
+      ["La bientraitance consiste uniquement à administrer correctement les médicaments.", "Faux"]
+    ];
+
+    const EXTRA_SINGLE = [
+      ["Quel principe impose de respecter les choix du patient ?", ["Autonomie", "Rentabilité", "Compétition", "Publicité"], "Autonomie"],
+      ["Avant d’administrer un médicament, l’infirmier doit d’abord :", ["Vérifier l’identité du patient", "Demander à la famille de décider", "Modifier la dose", "Supprimer la prescription"], "Vérifier l’identité du patient"],
+      ["Face à une prescription illisible, la conduite correcte est de :", ["Contacter le prescripteur", "Deviner la dose", "Ne rien tracer", "Demander au patient de choisir"], "Contacter le prescripteur"],
+      ["La transmission ciblée sert principalement à :", ["Assurer la continuité des soins", "Faire de la publicité", "Remplacer le diagnostic médical", "Éviter toute communication"], "Assurer la continuité des soins"],
+      ["Quel document assure la traçabilité quotidienne des soins infirmiers ?", ["Dossier de soins", "Carte bancaire", "Registre des visiteurs", "Bon de commande"], "Dossier de soins"],
+      ["Lorsqu’une erreur médicamenteuse survient, la priorité est de :", ["Sécuriser et surveiller le patient", "Dissimuler l’erreur", "Effacer le dossier", "Quitter le service"], "Sécuriser et surveiller le patient"],
+      ["Le secret partagé est permis principalement entre :", ["Professionnels participant à la prise en charge", "Tous les voisins", "Les médias", "Tous les visiteurs"], "Professionnels participant à la prise en charge"],
+      ["La valeur éthique qui vise à ne pas nuire est :", ["Non-malfaisance", "Popularité", "Obéissance aveugle", "Rentabilité"], "Non-malfaisance"],
+      ["En cas de refus de soins, l’infirmier doit :", ["Informer, respecter et tracer la décision", "Contraindre systématiquement", "Se moquer du patient", "Détruire le dossier"], "Informer, respecter et tracer la décision"],
+      ["Le professionnel responsable de clarifier une prescription est :", ["Le prescripteur", "Le visiteur", "Le gardien", "Un autre patient"], "Le prescripteur"],
+      ["La bonne attitude devant un collègue réalisant un acte dangereux est de :", ["Protéger le patient et signaler la situation", "Se taire toujours", "Filmer pour publier", "Encourager l’acte"], "Protéger le patient et signaler la situation"],
+      ["Une information donnée au patient doit être :", ["Claire et adaptée", "Volontairement confuse", "Réservée aux proches", "Toujours mensongère"], "Claire et adaptée"],
+      ["Le consentement du patient doit être :", ["Libre et éclairé", "Acheté", "Imposé", "Secret pour le patient"], "Libre et éclairé"],
+      ["La formation continue permet surtout de :", ["Maintenir les compétences", "Éviter les protocoles", "Supprimer la responsabilité", "Remplacer tout travail en équipe"], "Maintenir les compétences"],
+      ["Dans une situation d’urgence vitale, la priorité est de :", ["Porter secours dans ses compétences", "Attendre systématiquement", "Chercher un avantage financier", "Photographier la scène"], "Porter secours dans ses compétences"],
+      ["Le respect de la vie privée exige notamment de :", ["Préserver l’intimité pendant les soins", "Laisser la porte ouverte", "Exposer le patient", "Informer tous les visiteurs"], "Préserver l’intimité pendant les soins"],
+      ["Une délégation de tâche correcte nécessite :", ["Une personne compétente et une supervision", "L’absence de contrôle", "Le hasard", "L’accord des médias"], "Une personne compétente et une supervision"],
+      ["L’identitovigilance vise à :", ["Éviter les erreurs d’identité", "Accélérer la facturation", "Classer les visiteurs", "Choisir les patients"], "Éviter les erreurs d’identité"],
+      ["L’empathie consiste à :", ["Comprendre le vécu du patient sans le juger", "Décider à sa place", "Nier sa souffrance", "Rompre toute communication"], "Comprendre le vécu du patient sans le juger"],
+      ["La justice dans les soins signifie :", ["Traiter équitablement les patients", "Favoriser ses proches", "Soigner selon la richesse", "Refuser les personnes vulnérables"], "Traiter équitablement les patients"],
+      ["Après un soin, l’infirmier doit :", ["Tracer les actes réalisés", "Effacer la prescription", "Partager le dossier en public", "Modifier l’identité"], "Tracer les actes réalisés"],
+      ["La première mesure de prévention des infections associées aux soins est :", ["L’hygiène des mains", "Le port permanent de bijoux", "La réutilisation des aiguilles", "L’absence de nettoyage"], "L’hygiène des mains"],
+      ["Un conflit d’intérêts doit être :", ["Déclaré", "Caché", "Récompensé", "Imposé au patient"], "Déclaré"]
+    ];
+
+    const EXTRA_MULTIPLE = [
+      ["Avant l’administration d’un médicament, quelles vérifications sont nécessaires ?", ["Identité du patient", "Nom du médicament", "Dose prescrite", "Popularité du produit"], ["Identité du patient", "Nom du médicament", "Dose prescrite"]],
+      ["Quels éléments favorisent la confidentialité ?", ["Parler à voix basse", "Protéger les dossiers", "Choisir un lieu adapté", "Publier les informations"], ["Parler à voix basse", "Protéger les dossiers", "Choisir un lieu adapté"]],
+      ["Quelles attitudes relèvent de la bientraitance ?", ["Écouter le patient", "Respecter son intimité", "Prévenir la douleur", "L’humilier"], ["Écouter le patient", "Respecter son intimité", "Prévenir la douleur"]],
+      ["Quels éléments doivent être tracés après un soin ?", ["Acte réalisé", "Date et heure", "Observations pertinentes", "Rumeurs du quartier"], ["Acte réalisé", "Date et heure", "Observations pertinentes"]],
+      ["En cas d’événement indésirable, l’infirmier doit :", ["Sécuriser le patient", "Alerter selon la procédure", "Tracer les faits", "Dissimuler l’événement"], ["Sécuriser le patient", "Alerter selon la procédure", "Tracer les faits"]],
+      ["Quels droits fondamentaux du patient doivent être respectés ?", ["Dignité", "Information", "Consentement", "Discrimination"], ["Dignité", "Information", "Consentement"]],
+      ["La continuité des soins repose sur :", ["Transmissions fiables", "Traçabilité", "Organisation de la relève", "Suppression du dossier"], ["Transmissions fiables", "Traçabilité", "Organisation de la relève"]],
+      ["Quelles mesures protègent les données numériques de santé ?", ["Mot de passe personnel", "Verrouillage de l’écran", "Accès limité aux personnes autorisées", "Partage public des identifiants"], ["Mot de passe personnel", "Verrouillage de l’écran", "Accès limité aux personnes autorisées"]],
+      ["Une communication professionnelle de qualité comprend :", ["Écoute active", "Langage adapté", "Respect", "Jugement humiliant"], ["Écoute active", "Langage adapté", "Respect"]],
+      ["Lors de l’encadrement d’un étudiant, l’infirmier doit :", ["Évaluer ses compétences", "Superviser les actes", "Respecter le consentement du patient", "Le laisser agir sans contrôle"], ["Évaluer ses compétences", "Superviser les actes", "Respecter le consentement du patient"]],
+      ["Quels comportements préviennent les conflits d’intérêts ?", ["Déclarer ses liens", "Refuser les avantages indus", "Rester impartial", "Accepter les commissions cachées"], ["Déclarer ses liens", "Refuser les avantages indus", "Rester impartial"]],
+      ["Devant un refus de soins, quelles actions sont adaptées ?", ["Écouter les raisons", "Informer des conséquences", "Tracer le refus", "Forcer systématiquement"], ["Écouter les raisons", "Informer des conséquences", "Tracer le refus"]],
+      ["Quels principes guident une pratique infirmière éthique ?", ["Bienfaisance", "Non-malfaisance", "Justice", "Favoritisme"], ["Bienfaisance", "Non-malfaisance", "Justice"]]
+    ];
+
+    const questionBank = CONFIG.subjects[0].questions;
+    EXTRA_TRUE_FALSE.forEach(([text, correct]) => questionBank.push({
+      type: "qcd", text, options: ["Vrai", "Faux"], answer: correct, correct,
+      explanation: correct === "Vrai" ? "Cette affirmation respecte les règles professionnelles." : "Cette affirmation est contraire aux règles professionnelles."
+    }));
+    EXTRA_SINGLE.forEach(([text, options, correct]) => questionBank.push({
+      type: "qcm", text, options, answer: correct, correct,
+      explanation: `La bonne réponse est : ${correct}.`
+    }));
+    EXTRA_MULTIPLE.forEach(([text, options, correct]) => questionBank.push({
+      type: "qcm", text, options, answers: correct, correct,
+      explanation: "Les réponses indiquées correspondent aux bonnes pratiques professionnelles."
+    }));
+
     /********************************************************************
      * VARIABLES GLOBALES
      ********************************************************************/
@@ -684,14 +769,21 @@
     let currentQuestionIndex = 0;
     let savedQuestionAnswers = {};
     const QUESTION_DURATION_SECONDS = 30;
+    const QUIZ_SETTINGS_KEY = "FORMATION_EVALUATION_quiz_settings_v1";
+    const DEFAULT_QUIZ_SETTINGS = {
+      questionCount: 100,
+      displayMode: "one",
+      questionType: "both"
+    };
+    let quizSettings = loadQuizSettings();
 
-    // Composition de chaque évaluation : 15 questions au total.
-    // Les 40 questions restent disponibles dans la banque et un nouveau
+    // Composition de chaque évaluation : 100 questions au total.
+    // Les 100 questions restent disponibles dans la banque et un nouvel ordre
     // tirage est effectué à chaque tentative.
     const QUIZ_COMPOSITION = {
-      trueFalse: 5,
-      singleAnswer: 5,
-      multipleAnswers: 5
+      trueFalse: 34,
+      singleAnswer: 33,
+      multipleAnswers: 33
     };
 
     function shuffleQuestions(items) {
@@ -717,29 +809,31 @@
     }
 
     function getQuizQuestionCount() {
-      return QUIZ_COMPOSITION.trueFalse + QUIZ_COMPOSITION.singleAnswer + QUIZ_COMPOSITION.multipleAnswers;
+      return quizSettings.questionCount;
+    }
+
+    function loadQuizSettings() {
+      try {
+        return { ...DEFAULT_QUIZ_SETTINGS, ...JSON.parse(localStorage.getItem(QUIZ_SETTINGS_KEY) || "{}") };
+      } catch (error) {
+        return { ...DEFAULT_QUIZ_SETTINGS };
+      }
+    }
+
+    function getQuestionsForSelectedType(questionBank) {
+      if (quizSettings.questionType === "qcd") {
+        return questionBank.filter(question => getQuestionCategory(question) === "trueFalse");
+      }
+      if (quizSettings.questionType === "qcm") {
+        return questionBank.filter(question => getQuestionCategory(question) !== "trueFalse");
+      }
+      return questionBank.slice();
     }
 
     function selectQuizQuestions(questionBank) {
-      const categories = {
-        trueFalse: [],
-        singleAnswer: [],
-        multipleAnswers: []
-      };
-
-      questionBank.forEach(question => {
-        categories[getQuestionCategory(question)].push(question);
-      });
-
-      const selected = [];
-      Object.entries(QUIZ_COMPOSITION).forEach(([category, quantity]) => {
-        if (categories[category].length < quantity) {
-          throw new Error(`Nombre insuffisant de questions dans la catégorie ${category}.`);
-        }
-        selected.push(...shuffleQuestions(categories[category]).slice(0, quantity));
-      });
-
-      return shuffleQuestions(selected);
+      const available = getQuestionsForSelectedType(questionBank);
+      const quantity = Math.min(Number(quizSettings.questionCount) || 15, available.length);
+      return shuffleQuestions(available).slice(0, quantity);
     }
 
     function getQuestionOrderSignature(questions) {
@@ -1069,7 +1163,7 @@
           </div>
           <p class="student-evaluation-meta"><strong>Matière :</strong> ${escapeHTML(availableSubject.matter)}</p>
           <p class="student-evaluation-meta"><strong>Durée :</strong> ${availableSubject.duration} min</p>
-          <p class="student-evaluation-meta"><strong>Questions :</strong> ${getQuizQuestionCount()} au total (5 Vrai/Faux, 5 à réponse unique et 5 à réponses multiples)</p>
+          <p class="student-evaluation-meta"><strong>Questions :</strong> ${getQuizQuestionCount()} — ${getQuizTypeLabel()} — ${quizSettings.displayMode === "all" ? "toutes sur une page" : "question par question"}</p>
           <p class="student-evaluation-meta"><strong>Fermeture :</strong> ${formatDateTime(availableSubject.closeDate, availableSubject.closeTime)}</p>
           <button class="student-start-btn" onclick="startQuickEvaluation('${availableSubject.id}')">Commencé</button>
         </div>
@@ -1103,6 +1197,76 @@
           </section>
         </div>
       `;
+    }
+
+    function getQuizTypeLabel() {
+      if (quizSettings.questionType === "qcd") return "QCD seulement";
+      if (quizSettings.questionType === "qcm") return "QCM seulement";
+      return "QCM et QCD";
+    }
+
+    function getMaximumQuestionCount(type = quizSettings.questionType) {
+      const bank = subjects[0]?.questions || CONFIG.subjects[0].questions;
+      if (type === "qcd") return bank.filter(q => getQuestionCategory(q) === "trueFalse").length;
+      if (type === "qcm") return bank.filter(q => getQuestionCategory(q) !== "trueFalse").length;
+      return bank.length;
+    }
+
+    function openQuizSettings() {
+      const modal = document.getElementById("modal");
+      const max = getMaximumQuestionCount();
+      modal.className = "modal";
+      modal.innerHTML = `
+        <div class="modal-content settings-modal-content">
+          <h2>⚙ Paramètres du quiz</h2>
+          <div class="settings-field">
+            <label for="settingsQuestionCount"><strong>Nombre de questions</strong></label>
+            <input id="settingsQuestionCount" type="number" min="1" max="${max}" value="${Math.min(quizSettings.questionCount, max)}">
+            <small id="settingsQuestionLimit" class="muted">Maximum disponible : ${max}</small>
+          </div>
+          <div class="settings-field">
+            <label for="settingsDisplayMode"><strong>Mode d’affichage</strong></label>
+            <select id="settingsDisplayMode">
+              <option value="one" ${quizSettings.displayMode === "one" ? "selected" : ""}>Question par question</option>
+              <option value="all" ${quizSettings.displayMode === "all" ? "selected" : ""}>Toutes les questions</option>
+            </select>
+          </div>
+          <div class="settings-field">
+            <label for="settingsQuestionType"><strong>Type de questions</strong></label>
+            <select id="settingsQuestionType" onchange="updateSettingsQuestionLimit()">
+              <option value="both" ${quizSettings.questionType === "both" ? "selected" : ""}>QCM et QCD</option>
+              <option value="qcm" ${quizSettings.questionType === "qcm" ? "selected" : ""}>QCM seulement</option>
+              <option value="qcd" ${quizSettings.questionType === "qcd" ? "selected" : ""}>QCD seulement (Vrai/Faux)</option>
+            </select>
+          </div>
+          <div class="actions settings-actions">
+            <button class="btn-light" type="button" onclick="closeModal()">Annuler</button>
+            <button class="btn-green" type="button" onclick="saveQuizSettings()">Enregistrer</button>
+          </div>
+        </div>`;
+    }
+
+    function updateSettingsQuestionLimit() {
+      const type = document.getElementById("settingsQuestionType").value;
+      const max = getMaximumQuestionCount(type);
+      const input = document.getElementById("settingsQuestionCount");
+      input.max = max;
+      if (Number(input.value) > max) input.value = max;
+      document.getElementById("settingsQuestionLimit").textContent = `Maximum disponible : ${max}`;
+    }
+
+    function saveQuizSettings() {
+      const type = document.getElementById("settingsQuestionType").value;
+      const max = getMaximumQuestionCount(type);
+      const requested = Number(document.getElementById("settingsQuestionCount").value);
+      quizSettings = {
+        questionCount: Math.max(1, Math.min(max, Number.isFinite(requested) ? Math.floor(requested) : 15)),
+        displayMode: document.getElementById("settingsDisplayMode").value,
+        questionType: type
+      };
+      localStorage.setItem(QUIZ_SETTINGS_KEY, JSON.stringify(quizSettings));
+      closeModal();
+      renderSubjects();
     }
 
     function showStudentForm(subjectId) {
@@ -1493,6 +1657,31 @@
     function renderQuiz() {
       const quizView = document.getElementById("quizView");
       const totalQuestions = currentSubject.questions.length;
+      if (quizSettings.displayMode === "all") {
+        quizView.innerHTML = `
+          <div class="quiz-layout quiz-layout-single">
+            <div class="panel quiz-panel quiz-panel-clean">
+              <div class="question-timer-top question-timer-clean">
+                <strong id="timer" class="timer question-timer">${String(Math.floor((totalQuestions * QUESTION_DURATION_SECONDS) / 60)).padStart(2, "0")}:00</strong>
+                <div class="question-progress-wrap"><div id="questionProgressBar" class="question-progress-bar" style="width:100%"></div></div>
+              </div>
+              <form id="quizForm">
+                <p class="muted all-questions-note">${totalQuestions} questions affichées sur cette page.</p>
+                ${currentSubject.questions.map((question, index) => `
+                  <section class="all-question-block">
+                    <div class="all-question-number">Question ${index + 1} / ${totalQuestions}</div>
+                    ${renderQuestion(question, index)}
+                  </section>`).join("")}
+                <div class="question-navigation">
+                  <button type="button" class="btn-green" onclick="submitQuiz(false)">Valider ma composition</button>
+                </div>
+              </form>
+            </div>
+          </div>`;
+        restoreAllQuestionAnswers();
+        quizView.scrollIntoView({ behavior: "smooth", block: "start" });
+        return;
+      }
       const q = currentSubject.questions[currentQuestionIndex];
       const isLastQuestion = currentQuestionIndex >= totalQuestions - 1;
 
@@ -1545,6 +1734,22 @@
       savedQuestionAnswers[currentQuestionIndex] = selectedNodes.map(input => input.value);
     }
 
+    function saveAllQuestionAnswers() {
+      currentSubject.questions.forEach((question, index) => {
+        const selectedNodes = Array.from(document.querySelectorAll(`input[name="q-${index}"]:checked`));
+        savedQuestionAnswers[index] = selectedNodes.map(input => input.value);
+      });
+    }
+
+    function restoreAllQuestionAnswers() {
+      currentSubject.questions.forEach((question, index) => {
+        (savedQuestionAnswers[index] || []).forEach(value => {
+          const input = Array.from(document.querySelectorAll(`input[name="q-${index}"]`)).find(node => node.value === value);
+          if (input) input.checked = true;
+        });
+      });
+    }
+
     function restoreCurrentQuestionAnswer() {
       const savedAnswers = savedQuestionAnswers[currentQuestionIndex] || [];
       savedAnswers.forEach(value => {
@@ -1566,6 +1771,7 @@
     }
 
     function startTimer(seconds) {
+      if (quizSettings.displayMode === "all") seconds = currentSubject.questions.length * QUESTION_DURATION_SECONDS;
       let remaining = seconds;
       updateTimerDisplay(remaining, seconds);
       clearInterval(timerInterval);
@@ -1574,7 +1780,8 @@
         updateTimerDisplay(remaining, seconds);
         if (remaining <= 0) {
           clearInterval(timerInterval);
-          goToNextQuestion();
+          if (quizSettings.displayMode === "all") submitQuiz(true);
+          else goToNextQuestion();
         }
       }, 1000);
     }
@@ -1615,7 +1822,8 @@
       const marking = currentSubject.marking || CONFIG.defaultMarking;
       const answers = [];
 
-      saveCurrentQuestionAnswer();
+      if (quizSettings.displayMode === "all") saveAllQuestionAnswers();
+      else saveCurrentQuestionAnswer();
 
       currentSubject.questions.forEach((q, index) => {
         const expected = Array.isArray(q.answers) ? q.answers : (Array.isArray(q.correct) ? q.correct : [q.answer || q.correct]);
